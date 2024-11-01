@@ -1,6 +1,6 @@
 name: landscape_analysis
 description: A cli for analyzing pubspec files and generating visual dependency graphs using Graphviz.
-version: 0.0.1
+version: 1.0.0
 repository: https://github.com/Jannik-dev/landscape_analysis
 issue_tracker: https://github.com/Jannik-dev/landscape_analysis/issues
 
