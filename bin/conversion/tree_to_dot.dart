@@ -16,7 +16,8 @@ class TreeToDot<T> {
   String toDot(Tree<T> tree) {
     final nodeStatements = <String>{}; // Use a Set to avoid duplicate nodes
     final edgeStatements = <String>{}; // Use a Set to avoid duplicate edges
-    final stack = List<Tree<T>>.from(tree.children); // Stack initialized with children of root
+    final stack = List<Tree<T>>.from(
+        tree.children); // Stack initialized with children of root
 
     // Iterative depth-first traversal using a stack
     while (stack.isNotEmpty) {
@@ -28,7 +29,8 @@ class TreeToDot<T> {
       // Process each child
       for (final child in node.children) {
         // Add the edge from the current node to the child
-        edgeStatements.add('"${getLabel(node.value)}" -> "${getLabel(child.value)}";');
+        edgeStatements
+            .add('"${getLabel(node.value)}" -> "${getLabel(child.value)}";');
 
         // Push child onto the stack to process its children later
         stack.add(child);

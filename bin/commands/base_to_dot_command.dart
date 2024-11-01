@@ -1,4 +1,3 @@
-import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' show Pubspec;
 

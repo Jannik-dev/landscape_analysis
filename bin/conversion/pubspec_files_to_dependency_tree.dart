@@ -22,7 +22,8 @@ class PubspecFilesToDependencyTree {
         root.addChild(pubspecNode);
       } else {
         // Set internal if node already exists
-        pubspecNode.value = Dependency(name: pubspecNode.value.name, isInternal: true);
+        pubspecNode.value =
+            Dependency(name: pubspecNode.value.name, isInternal: true);
       }
 
       for (final dependency in pubspec.dependencies.keys) {

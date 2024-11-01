@@ -5,8 +5,10 @@ import 'base_to_dot_command.dart';
 class FromFolderCommand extends BaseToDotCommand {
   @override
   String get name => 'folder';
+
   @override
-  String get description => '''Generates a dot diagram from a folder of pubspec files.
+  String get description =>
+      '''Generates a dot diagram from a folder of pubspec files.
 
 Dot diagrams can be interpreted by graphviz. You can install it from https://graphviz.org/download/.
 To generate a diagram in one command you can use:

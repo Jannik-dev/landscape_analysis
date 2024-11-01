@@ -30,14 +30,15 @@ class GitlabPubspecsProvider extends PubspecFilesProvider {
 
       for (final path in pubspecPaths) {
         final content = await retryWithDelay(
-              () => getPubspecContent(projectId, path),
+          () => getPubspecContent(projectId, path),
           maxRetries,
           delayBetweenRequests,
         );
         if (content.isNotEmpty) {
           pubspecs.add(content);
         }
-        await Future.delayed(delayBetweenRequests); // Rate limit between requests
+        await Future.delayed(
+            delayBetweenRequests); // Rate limit between requests
       }
     }
 
@@ -47,7 +48,8 @@ class GitlabPubspecsProvider extends PubspecFilesProvider {
   Future<List<String>> getProjectIdsInGroup(String groupId) async {
     final url = Uri.parse('$gitlabApiUrl/groups/$groupId/projects');
     final headers = {'Private-Token': token};
-    final response = await retryWithDelay(() => http.get(url, headers: headers), maxRetries, delayBetweenRequests);
+    final response = await retryWithDelay(() => http.get(url, headers: headers),
+        maxRetries, delayBetweenRequests);
 
     if (response.statusCode == 200) {
       final projects = jsonDecode(response.body) as List;
@@ -66,8 +68,9 @@ class GitlabPubspecsProvider extends PubspecFilesProvider {
 
     while (hasMore) {
       final response = await retryWithDelay(
-            () => http.get(
-          url.replace(queryParameters: {'recursive': 'true', 'page': page.toString()}),
+        () => http.get(
+          url.replace(
+              queryParameters: {'recursive': 'true', 'page': page.toString()}),
           headers: headers,
         ),
         maxRetries,
@@ -83,7 +86,8 @@ class GitlabPubspecsProvider extends PubspecFilesProvider {
         }
         hasMore = files.isNotEmpty;
         page++;
-        await Future.delayed(delayBetweenRequests); // Delay between paginated requests
+        await Future.delayed(
+            delayBetweenRequests); // Delay between paginated requests
       } else {
         throw Exception('Failed to retrieve file paths for project $projectId');
       }
@@ -93,7 +97,8 @@ class GitlabPubspecsProvider extends PubspecFilesProvider {
   }
 
   Future<String> getPubspecContent(String projectId, String filePath) async {
-    final url = Uri.parse('$gitlabApiUrl/projects/$projectId/repository/files/$filePath/raw');
+    final url = Uri.parse(
+        '$gitlabApiUrl/projects/$projectId/repository/files/$filePath/raw');
     final response = await http.get(url, headers: {'Private-Token': token});
 
     if (response.statusCode == 200) {
@@ -107,7 +112,8 @@ class GitlabPubspecsProvider extends PubspecFilesProvider {
   }
 
   // Helper function for retrying with delay
-  Future<T> retryWithDelay<T>(Future<T> Function() action, int retries, Duration delay) async {
+  Future<T> retryWithDelay<T>(
+      Future<T> Function() action, int retries, Duration delay) async {
     for (int attempt = 0; attempt < retries; attempt++) {
       try {
         return await action();
