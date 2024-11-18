@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
+import 'package:landscape_analysis/conversion/command/to_dot_command.dart';
 import 'package:yaml/yaml.dart';
-
-import 'commands/to_dot_command.dart';
 
 ArgParser buildParser() {
   return ArgParser()
