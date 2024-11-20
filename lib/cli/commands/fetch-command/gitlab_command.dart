@@ -2,13 +2,13 @@ import 'package:args/args.dart';
 import 'package:landscape_analysis/cli/commands/fetch-command/base_fetch_command.dart';
 import 'package:landscape_analysis/core/input/gitlab_source.dart';
 import 'package:landscape_analysis/core/input/pubspec_source.dart';
-import 'package:landscape_analysis/core/shared/api_client.dart';
+import 'package:landscape_analysis/core/input/http/api_client.dart';
 
 class GitLabCommand extends BaseFetchCommand {
   @override
   final String name = 'gitlab';
   @override
-  final String description = 'Fetch pubspec.yaml files from a GitLab group.';
+  final String description = 'Fetch file.yaml files from a GitLab group.';
 
   GitLabCommand() {
     argParser

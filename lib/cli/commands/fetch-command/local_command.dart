@@ -10,7 +10,7 @@ class LocalCommand extends BaseFetchCommand {
   @override
   final String name = 'local';
   @override
-  final String description = 'Fetch pubspec.yaml files from a local directory.';
+  final String description = 'Fetch file.yaml files from a local directory.';
 
   LocalCommand() {
     argParser.addOption(

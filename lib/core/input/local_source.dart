@@ -12,7 +12,7 @@ class LocalSource implements PubspecSource {
     final List<Uri> pubspecUris = [];
 
     await for (final entity in directory.list(recursive: true)) {
-      if (entity is File && entity.path.endsWith('pubspec.yaml')) {
+      if (entity is File && entity.path.endsWith('file.yaml')) {
         pubspecUris.add(Uri.file(entity.path));
       }
     }

@@ -7,7 +7,7 @@ class FetchCommand extends Command<void> {
   @override
   final String name = 'fetch';
   @override
-  final String description = 'Fetch pubspec.yaml files from various sources.';
+  final String description = 'Fetch file.yaml files from various sources.';
 
   FetchCommand() {
     addSubcommand(LocalCommand());

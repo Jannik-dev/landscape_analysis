@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:landscape_analysis/cli/cli_runner.dart';
+import 'package:landscape_analysis/cli/commands/analyze_command.dart';
 import 'package:landscape_analysis/cli/commands/fetch-command/fetch_command.dart';
 import 'package:yaml/yaml.dart';
 
@@ -22,10 +23,10 @@ ArgParser buildParser() {
 }
 
 String getVersion() {
-  final pubspecFile = File('pubspec.yaml');
+  final pubspecFile = File('file.yaml');
 
   if (!pubspecFile.existsSync()) {
-    print('pubspec.yaml not found');
+    print('file.yaml not found');
     exit(1);
   }
 
@@ -35,16 +36,17 @@ String getVersion() {
   if (yamlMap.containsKey('version')) {
     return yamlMap['version'];
   } else {
-    print('No version in pubspec.yaml found');
+    print('No version in file.yaml found');
     exit(1);
   }
 }
 
 void main(List<String> arguments) async {
   // Initialize the CommandRunner and add ToDotCommand
-  final CommandRunner runner = CliRunner(
+  final CommandRunner<void> runner = CliRunner<void>(
       'landscape_analysis', 'A tool for generating dependency diagrams')
     ..addCommand(FetchCommand())
+    ..addCommand(AnalyzeCommand())
     ..argParser.addFlag(
       'version',
       abbr: 'v',

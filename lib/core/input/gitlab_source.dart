@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../shared/api_client.dart';
+import 'http/api_client.dart';
 import 'pubspec_source.dart';
 
 class GitlabSource implements PubspecSource {
@@ -25,7 +25,7 @@ class GitlabSource implements PubspecSource {
     dio.options.headers['PRIVATE-TOKEN'] = token;
   }
 
-  /// Fetches URIs of all `pubspec.yaml` files available in the GitLab group.
+  /// Fetches URIs of all `file.yaml` files available in the GitLab group.
   @override
   Future<List<Uri>> fetchPubspecUris() async {
     final List<Uri> pubspecUris = [];
@@ -62,7 +62,7 @@ class GitlabSource implements PubspecSource {
   Future<void> processProject(
       project, List<Uri> pubspecUris, int processedProjects) async {
     final projectId = project['id'];
-    print('    Fetching pubspec.yaml for project $projectId...');
+    print('    Fetching file.yaml for project $projectId...');
 
     await _loopOverPages(
       (page) async => await dio.get<List<dynamic>>(
@@ -75,14 +75,14 @@ class GitlabSource implements PubspecSource {
       ),
       (item) async {
         if (item['type'] == 'blob' &&
-            (item['path'] as String).endsWith('pubspec.yaml')) {
-          if ((item['path'] as String).endsWith('example/pubspec.yaml')) {
+            (item['path'] as String).endsWith('file.yaml')) {
+          if ((item['path'] as String).endsWith('example/file.yaml')) {
             print(
-                '        EXCLUDE found pubspec.yaml in project $projectId at: ${item['path']}');
+                '        EXCLUDE found file.yaml in project $projectId at: ${item['path']}');
             return;
           }
           print(
-              '        Found pubspec.yaml in project $projectId at: ${item['path']}');
+              '        Found file.yaml in project $projectId at: ${item['path']}');
           final filePath = Uri.encodeComponent(item['path'] as String);
           final fileUri = Uri.parse(
             '${dio.options.baseUrl}/projects/$projectId/repository/files/$filePath/raw',
@@ -117,7 +117,7 @@ class GitlabSource implements PubspecSource {
     } while (page <= totalPages);
   }
 
-  /// Fetches the content of a `pubspec.yaml` file given its URI.
+  /// Fetches the content of a `file.yaml` file given its URI.
   @override
   Future<String> fetchPubspecContent(Uri uri) async {
     try {
