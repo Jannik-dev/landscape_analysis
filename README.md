@@ -38,7 +38,7 @@ Activate `landscape_analysis` directly from `pub.dev` or a Git repository.
 2. Compile the executable:
 
    ```bash
-   dart compile exe bin/landscape_analysis.dart -o landscape_analysis
+   dart compile exe bin/main.dart -o landscape_analysis
    ```
 
 3. Run the executable:

@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
-import 'package:landscape_analysis/conversion/command/to_dot_command.dart';
+import 'package:landscape_analysis/cli/cli_runner.dart';
+import 'package:landscape_analysis/cli/commands/fetch-command/fetch_command.dart';
 import 'package:yaml/yaml.dart';
 
 ArgParser buildParser() {
@@ -41,9 +42,9 @@ String getVersion() {
 
 void main(List<String> arguments) async {
   // Initialize the CommandRunner and add ToDotCommand
-  final runner = CommandRunner(
+  final CommandRunner runner = CliRunner(
       'landscape_analysis', 'A tool for generating dependency diagrams')
-    ..addCommand(ToDotCommand()) // Add your custom command here
+    ..addCommand(FetchCommand())
     ..argParser.addFlag(
       'version',
       abbr: 'v',
