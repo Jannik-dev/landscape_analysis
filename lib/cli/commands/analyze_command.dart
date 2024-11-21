@@ -3,8 +3,8 @@ import 'package:landscape_analysis/core/output/gexf_generator.dart';
 
 import '../../core/output/dot_generator.dart';
 import '../../core/output/graph_ml_generator.dart';
-import '../../core/output/output_generator.dart';
 import '../../core/output/json_generator.dart';
+import '../../core/output/output_generator.dart';
 import '../../core/processing/dependency_edge.dart';
 import '../../core/processing/dependency_graph_parser.dart';
 import '../../core/processing/dependency_node.dart';

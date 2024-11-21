@@ -14,15 +14,18 @@ class GraphMLGenerator implements OutputGenerator {
         'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
         'xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns '
         'http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">');
-    buffer.writeln('<graph edgedefault="directed">');
 
     // Add node attributes (e.g., isInternal)
     buffer.writeln(
+        '<key id="label" for="node" attr.name="label" attr.type="string"/>'
         '<key id="isInternal" for="node" attr.name="isInternal" attr.type="boolean"/>');
+
+    buffer.writeln('<graph edgedefault="directed">');
 
     // Add nodes
     for (final node in graph.nodes.values) {
       buffer.writeln('<node id="${node.id}">');
+      buffer.writeln('  <data key="label">${node.id}</data>');
       buffer.writeln('  <data key="isInternal">${node.isInternal}</data>');
       buffer.writeln('</node>');
     }
