@@ -1,17 +1,11 @@
-You can analyse a folder with the following command:
+Put the `pubspec.yaml` files in a folder and run the following command to analyze them:
 
 ```bash
-landscape_analysis todot file --path ./path/to/your/folder
+landscape_analysis analyze --format <format> ./path/to/your/folder > output
 ```
 
-...or analyse a gitlab group like so:
+Optional: You can fetch `pubspec.yaml` files from a gitlab group using:
 
 ```bash
-landscape_analysis todot gitlab --token YOUR_TOKEN --groupId YOUR_GROUP_ID --gitlabApiUrl YOUR_GITLAB_URL
-```
-
-You can also pipe the output to dot like so:
-
-```bash
-landscape_analysis todot file --path ./pubs | dot -Tsvg -o output.svg
+landscape_analysis fetch gitlab --token <token> --group-id <group-id> --api-url <api-url>
 ```

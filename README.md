@@ -1,17 +1,16 @@
 # Landscape Analysis CLI
 
-`landscape_analysis` is a Dart CLI tool for analyzing Dart package dependencies and generating visual dependency graphs using Graphviz. It reads `pubspec.yaml` files, builds a dependency tree, and outputs a Graphviz-compatible dot format for visualization.
+`landscape_analysis` is a Dart CLI tool for analyzing Dart package dependencies and generating visual dependency graphs. It reads `pubspec.yaml` files, builds a dependency tree, and supports different output formats.
 
 ## Features
 
-- Analyze dependencies from a folder of Dart `pubspec.yaml` files.
 - Fetch dependencies from a GitLab group using API credentials.
-- Output dependency graphs in Graphviz dot format.
+- Analyze dependencies from a folder of Dart `pubspec.yaml` files.
+- Output dependency graphs in dot, gexf, graphml or json format.
 
 ## Prerequisites
 
 1. **Dart SDK**: Install the [Dart SDK](https://dart.dev/get-dart).
-2. **Graphviz**: Install [Graphviz](https://graphviz.org/download/) for visualizing diagrams. Ensure `dot` is available in your PATH.
 
 ## Installation
 
@@ -49,31 +48,23 @@ Activate `landscape_analysis` directly from `pub.dev` or a Git repository.
 
 ## Usage
 
-You can analyse a folder with the following command:
+Put the `pubspec.yaml` files in a folder and run the following command to analyze them:
 
 ```bash
-landscape_analysis todot file --path ./path/to/your/folder
+landscape_analysis analyze --format <format> ./path/to/your/folder > output
 ```
 
-...or analyse a gitlab group like so:
+Optional: You can fetch `pubspec.yaml` files from a gitlab group using:
 
 ```bash
-landscape_analysis todot gitlab --token YOUR_TOKEN --groupId YOUR_GROUP_ID --gitlabApiUrl YOUR_GITLAB_URL
+landscape_analysis fetch gitlab --token <token> --group-id <group-id> --api-url <api-url>
 ```
 
-### Generate Graphs with Graphviz
+### Visualize the graph
 
-To visualize the dependency graph with Graphviz, pipe the output to `dot`.
-For more information about Graphviz visit https://graphviz.org.
-
-```bash
-landscape_analysis todot file --path ./pubs | dot -Tsvg -o output.svg
-```
-
-## Troubleshooting
-
-- **`dot` command not found**: Ensure Graphviz is installed and its `bin` directory is in your PATH.
-- **GitLab API permissions**: Ensure your API token has the necessary access.
+It is recommended to use yEd (uses graphml-format) for visualization, if a hierarchical structure is desired.
+For simple graphs GraphViz (uses dot-format) is sufficient.
+And some metrics can be calculated in Gephi (uses gexf-format).
 
 ## Contributing
 
