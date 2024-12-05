@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fix fetching `pubspec.yaml` files from local
+
 ## 2.0.0
 
 - Restructure command line interface
